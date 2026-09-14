@@ -6,13 +6,13 @@
 <img src="https://img.shields.io/badge/Django-3.2.3-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
 <img src="https://img.shields.io/badge/DRF-3.12.4-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django REST Framework">
 <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
-<img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx">
+<img src="https://img.shields.io/badge/Nginx-1.22.1-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx">
 
 <br>
 
 <img src="https://img.shields.io/badge/PostgreSQL-13-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
 <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions">
-<img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
 <img src="https://img.shields.io/badge/Yandex-Practicum-red?style=for-the-badge&logo=yandex&logoColor=white" alt="Yandex Practicum">
 
 <br><br>
@@ -32,26 +32,36 @@
 <ul>
   <li><b>Backend</b> — Django + DRF. API для работы с котиками, достижениями и пользователями.</li>
   <li><b>Frontend</b> — SPA на React.</li>
-  <li><b>Gateway</b> — Nginx: раздача статики и проксирование запросов к бэкенду.</li>
+  <li><b>Gateway</b> — Nginx 1.22.1: раздача статики фронтенда.</li>
 </ul>
 
-<p>Проект полностью упакован в <b>Docker-контейнеры</b>, оркестрация через <code>docker-compose</code>. Настроен CI/CD через GitHub Actions с уведомлениями в Telegram.</p>
+<p>Все сервисы упакованы в <b>Docker-контейнеры</b>, оркестрация через <code>docker-compose</code>. Настроен CI/CD через GitHub Actions.</p>
 
 <hr>
 
 <h2>✅ Что реализовано</h2>
 
 <ul>
-  <li>Backend на Django + DRF с полным API для котиков и достижений.</li>
+  <li>Backend на Django + DRF: модели <code>Achievement</code>, <code>Cat</code>, <code>AchievementCat</code>.</li>
+  <li>API для котиков и достижений (<code>CatViewSet</code>, <code>AchievementViewSet</code>).</li>
   <li>Аутентификация и регистрация через <code>djoser</code>.</li>
   <li>Валидация цвета кота через <code>webcolors</code>.</li>
-  <li>Frontend на React.</li>
-  <li>Раздача статики и проксирование через Nginx.</li>
-  <li>Контейнеризация: <code>db</code>, <code>backend</code>, <code>frontend</code>, <code>gateway</code>.</li>
-  <li>Оркестрация через <code>docker-compose</code>.</li>
-  <li>CI/CD на GitHub Actions: тестирование и деплой.</li>
-  <li>Уведомления о результатах в Telegram.</li>
+  <li>Frontend на React, сборка в статику через <code>npm run build</code>.</li>
+  <li>Nginx-контейнер, который раздаёт статику фронтенда.</li>
+  <li>Docker Compose: сервисы <code>db</code>, <code>backend</code>, <code>frontend</code>, <code>gateway</code>.</li>
+  <li>Переменные окружения для БД (<code>.env.example</code>).</li>
   <li>Тесты (<code>pytest</code>) для бэкенда.</li>
+</ul>
+
+<hr>
+
+<h2>🚧 Что в разработке</h2>
+
+<ul>
+  <li>Проксирование <code>/api/</code> и <code>/admin/</code> на backend через Nginx (сейчас строки <code>proxy_pass</code> закомментированы).</li>
+  <li>Вынос настроек Django (<code>SECRET_KEY</code>, <code>DEBUG</code>, <code>ALLOWED_HOSTS</code>) в переменные окружения.</li>
+  <li>CI/CD на GitHub Actions: тестирование, сборка и деплой.</li>
+  <li>Уведомления о результатах в Telegram.</li>
 </ul>
 
 <hr>
@@ -107,7 +117,7 @@
   </thead>
   <tbody>
     <tr><td><code>GET / POST</code></td><td><code>/cats/</code></td><td>Список / создание котиков</td></tr>
-    <tr><td><code>GET / PUT / PATCH / DELETE</code></td><td><code>/cats/{id}/</code></td><td>Получить / изменить / удалить котика</td></tr>
+    <tr><td><code>GET / PUT / PATCH / DELETE</code></td><td><code>/cats/{id}/</code></td><td>Работа с конкретным котиком</td></tr>
     <tr><td><code>GET / POST</code></td><td><code>/achievements/</code></td><td>Список / создание достижений</td></tr>
     <tr><td><code>GET / PUT / PATCH / DELETE</code></td><td><code>/achievements/{id}/</code></td><td>Работа с достижением</td></tr>
     <tr><td><code>POST</code></td><td><code>/auth/users/</code></td><td>Регистрация пользователя (djoser)</td></tr>
@@ -143,10 +153,10 @@
     <tr><td><b>Pillow</b></td><td>9.0.0</td><td>Работа с изображениями</td></tr>
     <tr><td><b>PostgreSQL</b></td><td>13</td><td>База данных</td></tr>
     <tr><td><b>React</b></td><td>—</td><td>Frontend</td></tr>
-    <tr><td><b>Nginx</b></td><td>—</td><td>Раздача статики и проксирование</td></tr>
+    <tr><td><b>Nginx</b></td><td>1.22.1</td><td>Раздача статики</td></tr>
     <tr><td><b>Docker / Docker Compose</b></td><td>—</td><td>Контейнеризация и оркестрация</td></tr>
-    <tr><td><b>GitHub Actions</b></td><td>—</td><td>CI/CD</td></tr>
     <tr><td><b>Pytest</b></td><td>6.2.4</td><td>Тестирование</td></tr>
+    <tr><td><b>pytest-django</b></td><td>4.4.0</td><td>Интеграция pytest с Django</td></tr>
   </tbody>
 </table>
 
@@ -160,7 +170,6 @@
 ├── backend/
 │   ├── cats/
 │   │   ├── migrations/
-│   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py           # Achievement, Cat, AchievementCat
@@ -172,11 +181,18 @@
 │   ├── requirements.txt
 │   └── README.md
 ├── frontend/
-│   └── Dockerfile
+│   ├── public/
+│   ├── src/
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
 ├── nginx/
-│   └── Dockerfile
+│   ├── Dockerfile              # FROM nginx:1.22.1
+│   └── nginx.conf              # Раздача статики, проксирование (в разработке)
 ├── tests/                      # Сквозные тесты
-├── .env.example
+├── .env.example                # Переменные окружения
 ├── .gitignore
 ├── README.md
 ├── docker-compose.yml
@@ -199,14 +215,38 @@
   <tbody>
     <tr><td><b>db</b></td><td><code>postgres:13</code></td><td>База данных, volume <code>pg_data</code></td></tr>
     <tr><td><b>backend</b></td><td><code>./backend/</code></td><td>Django-приложение</td></tr>
-    <tr><td><b>frontend</b></td><td><code>./frontend/</code></td><td>React, собирается в <code>/static/</code></td></tr>
-    <tr><td><b>gateway</b></td><td><code>./nginx/</code></td><td>Nginx, порт <code>9000:80</code></td></tr>
+    <tr><td><b>frontend</b></td><td><code>./frontend/</code></td><td>React, копирует билд в volume <code>static</code></td></tr>
+    <tr><td><b>gateway</b></td><td><code>./nginx/</code></td><td>Nginx, порт <code>9000:80</code>, читает статику из <code>static</code></td></tr>
   </tbody>
 </table>
 
 </div>
 
-<p>Frontend при сборке копирует билд в общий volume <code>static</code>, откуда его раздаёт Nginx.</p>
+<h3>Конфигурация Nginx</h3>
+
+<p>Файл <code>nginx/nginx.conf</code> монтируется в контейнер как шаблон <code>default.conf.template</code>. Nginx:</p>
+
+<ul>
+  <li>Раздаёт статику фронтенда из <code>/static/</code> на <code>location /</code> с SPA-fallback (<code>try_files $uri $uri/ /index.html</code>).</li>
+  <li>Имеет заготовки для <code>location /api/</code> и <code>location /admin/</code>, но строки <code>proxy_pass</code> пока <b>закомментированы</b> — проксирование на backend ещё не подключено.</li>
+</ul>
+
+<hr>
+
+<h2>🔧 Переменные окружения</h2>
+
+<p>В корне лежит <code>.env.example</code> с текущими переменными:</p>
+
+<pre><code>POSTGRES_DB=kittygram
+POSTGRES_USER=kittygram_user
+POSTGRES_PASSWORD=kittygram_password
+DB_NAME=kittygram</code></pre>
+
+<p>Для запуска скопируйте его в <code>.env</code>:</p>
+
+<pre><code>cp .env.example .env</code></pre>
+
+<p>Переменные для Django (<code>SECRET_KEY</code>, <code>DEBUG</code>, <code>ALLOWED_HOSTS</code>) пока не вынесены — их добавление в планах.</p>
 
 <hr>
 
@@ -226,9 +266,8 @@
 cd kittygram-final-ad</code></pre>
   </li>
   <li>
-    <b>Создайте файл <code>.env</code> на основе <code>.env.example</code>:</b>
+    <b>Создайте файл <code>.env</code>:</b>
     <pre><code>cp .env.example .env</code></pre>
-    <p>Заполните переменные окружения (данные для подключения к БД, секретный ключ Django).</p>
   </li>
   <li>
     <b>Запустите контейнеры:</b>
@@ -248,25 +287,7 @@ cd kittygram-final-ad</code></pre>
   </li>
 </ol>
 
-<p>После запуска приложение доступно по адресу <code>http://localhost:9000/</code>, админ-панель — <code>http://localhost:9000/admin/</code>.</p>
-
-<hr>
-
-<h2>🔁 CI/CD</h2>
-
-<p>В проекте настроен пайплайн <b>GitHub Actions</b> (файл <code>kittygram_workflow.yml</code> в корне проекта). Что делает пайплайн:</p>
-
-<ul>
-  <li>Запускает тесты Kittygram при пуше в ветку <code>main</code>.</li>
-  <li>Собирает Docker-образы и пушит их в Docker Hub.</li>
-  <li>Деплоит проект на сервер.</li>
-  <li>Отправляет уведомление о результате в Telegram.</li>
-</ul>
-
-<p>Для работы пайплайна нужны секреты и файл <code>tests.yml</code> в корне репозитория:</p>
-
-<pre><code>repo_owner: ваш_логин_на_гитхабе
-dockerhub_username: ваш_логин_на_докерхабе</code></pre>
+<p>После запуска статика фронтенда доступна по адресу <code>http://localhost:9000/</code>. Для работы API через браузер нужно раскомментировать <code>proxy_pass</code> в <code>nginx.conf</code>.</p>
 
 <hr>
 
@@ -278,6 +299,15 @@ dockerhub_username: ваш_логин_на_докерхабе</code></pre>
 source venv/bin/activate  # или venv\Scripts\activate на Windows
 pip install -r backend/requirements.txt
 pytest</code></pre>
+
+<hr>
+
+<h2>📁 Вложенные README</h2>
+
+<ul>
+  <li><a href="./backend/README.md">backend/README.md</a> — как запустить бэкенд локально и в Docker.</li>
+  <li><a href="./frontend/README.md">frontend/README.md</a> — как запустить фронтенд локально и в Docker.</li>
+</ul>
 
 <hr>
 
